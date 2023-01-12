@@ -10,21 +10,31 @@ const create = async (request, response) => {
             response.status(400).send({ message: "Please, submit all the fields required!" });
         }
 
-        const user = await userService.create(request.body);
+        const userAlreadyExists = await userService.findUser(email);
 
-        if(!user) {
-            return response.status(400).send({ message: "Error creating user!" });
+        if(userAlreadyExists) {
+            response.status(400).send({ 
+                message: "User already exists!",
+                userAlreadyExists: true,
+             });
+             
+        } else {
+            const user = await userService.create(request.body);
+
+            if(!user) {
+                return response.status(400).send({ message: "Error creating user!" });
+            }
+
+            response.status(201).send({
+                message: "User successfully created!",
+                user: {
+                    id: user._id,
+                    firstName,
+                    lastName,
+                    email,
+                },
+            });
         }
-
-        response.status(201).send({
-            message: "User successfully created!",
-            user: {
-                id: user._id,
-                firstName,
-                lastName,
-                email,
-            },
-        });
     } catch (error) {
         response.status(500).send({ message: error.message });
     }
