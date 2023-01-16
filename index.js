@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import { connectToDatabase } from "./src/database/db.js";
 import userRoute from "./src/routes/userRoute.js";
+import noteRoute from './src/routes/noteRoute.js';
 import cors from "cors";
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/user", userRoute);
+app.use("/note", noteRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
