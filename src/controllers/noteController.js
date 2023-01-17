@@ -73,7 +73,28 @@ const getAll = async (request, response) => {
     }
 };
 
+const getByUserId = async (request, response) => {
+    try {
+        const { userId } = request.params;
+
+        const notes = await noteService.getByUserId(userId);
+
+        if(notes.length === 0) {
+            return response.status(404).send({
+                message: "This user there is no notes!",
+            });
+        }
+
+        response.send(notes);
+    } catch (error) {
+        response.status(500).send({
+            message: error.message,
+        });
+    }
+};
+
 export default {
     create,
     getAll,
+    getByUserId,
 };
