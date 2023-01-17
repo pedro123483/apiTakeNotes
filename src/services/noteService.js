@@ -2,7 +2,7 @@ import { noteModel } from "../models/note.js";
 
 const create = (body) => noteModel.create(body);
 const getAll = () => noteModel.find().populate("user");
-const getByUserId = (id) => noteModel.find({ user: id }).populate("user");
+const getByUserId = (id) => noteModel.find({ user: id }).sort({ _id: -1 }).populate("user");
 
 export default {
     create,
