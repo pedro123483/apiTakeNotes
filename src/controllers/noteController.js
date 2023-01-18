@@ -24,7 +24,7 @@ const create = async (request, response) => {
         const resultExplanation = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: `O que é ${title}? Explique detalhadamente. Me dê links para artigos na internet sobre o assunto`,
-            temperature: 0.6,
+            temperature: 1,
             max_tokens: 2000
         });
 
