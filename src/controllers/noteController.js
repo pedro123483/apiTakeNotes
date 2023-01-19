@@ -93,8 +93,23 @@ const getByUserId = async (request, response) => {
     }
 };
 
+const deleteNote = async (request, response) => {
+    try {
+        const { noteId } = request.params;
+
+        await noteService.deleteNote(noteId);
+
+        response.status(200).send({
+            message: "Note successfully deleted!",
+        });
+    } catch (error) {
+        response.status(500).send({ message: error.message });
+    }
+};
+
 export default {
     create,
     getAll,
     getByUserId,
+    deleteNote,
 };
