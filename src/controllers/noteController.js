@@ -109,9 +109,9 @@ const deleteNote = async (request, response) => {
 
 const searchByTitle = async (request, response) => {
     try {
-        const { title } = request.query;
+        const { title, id } = request.query;
 
-        const news = await noteService.search(title);
+        const news = await noteService.search(title, id);
 
         if(news.length === 0) {
             return response.status(404).send({ message: "News not found!" });
