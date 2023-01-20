@@ -111,19 +111,19 @@ const searchByTitle = async (request, response) => {
     try {
         const { title, id } = request.query;
 
-        const news = await noteService.search(title, id);
+        const note = await noteService.search(title, id);
 
-        if(news.length === 0) {
-            return response.status(404).send({ message: "News not found!" });
+        if(note.length === 0) {
+            return response.status(404).send(note);
         }
 
         return response.send({
-            result: news.map(singleNews => ({
-                id: singleNews._id,
-                title: singleNews.title,
-                category: singleNews.category,
-                explanation: singleNews.explanation,
-                user: singleNews.user
+            result: note.map(singleNote => ({
+                id: singleNote._id,
+                title: singleNote.title,
+                category: singleNote.category,
+                explanation: singleNote.explanation,
+                user: singleNote.user
             }))
         });
     } catch (error) {
