@@ -114,7 +114,9 @@ const searchByTitle = async (request, response) => {
         const note = await noteService.search(title, id);
 
         if(note.length === 0) {
-            return response.send(note);
+            return response.send({
+                result: note,
+            });
         }
 
         return response.send({
