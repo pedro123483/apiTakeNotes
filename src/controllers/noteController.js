@@ -121,6 +121,7 @@ const searchByTitle = async (request, response) => {
             result: news.map(singleNews => ({
                 id: singleNews._id,
                 title: singleNews.title,
+                category: singleNews.category,
                 explanation: singleNews.explanation,
                 user: singleNews.user
             }))
