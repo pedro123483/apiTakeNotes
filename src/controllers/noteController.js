@@ -107,9 +107,35 @@ const deleteNote = async (request, response) => {
     }
 };
 
+const searchByTitle = async (request, response) => {
+    try {
+        const { title } = request.query;
+
+        const news = await noteService.search(title);
+
+        if(news.length === 0) {
+            return response.status(404).send({ message: "News not found!" });
+        }
+
+        return response.send({
+            result: news.map(singleNews => ({
+                id: singleNews._id,
+                title: singleNews.title,
+                explanation: singleNews.explanation,
+                user: singleNews.user
+            }))
+        });
+    } catch (error) {
+        return response.status(500).send({
+            message: error.message,
+        });
+    }
+};
+
 export default {
     create,
     getAll,
     getByUserId,
     deleteNote,
+    searchByTitle,
 };

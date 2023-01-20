@@ -6,6 +6,7 @@ const router = Router();
 router.post("/", noteController.create);
 router.get("/", noteController.getAll);
 router.get("/byUser/:userId", noteController.getByUserId);
+router.get("/search", noteController.searchByTitle);
 router.delete("/:noteId", noteController.deleteNote);
 
 export default router;
