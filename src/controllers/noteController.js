@@ -82,7 +82,7 @@ const getByUserId = async (request, response) => {
         if(notes.length === 0) {
             return response.send(notes);
         }
-
+        
         response.send(notes);
     } catch (error) {
         response.status(500).send({
